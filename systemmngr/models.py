@@ -27,7 +27,7 @@ class Menupermission(models.Model):
     update_time = models.DateField(auto_now_add=True)
 
 class Role(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(unique=True, max_length=50)
     describes = models.CharField(max_length=100, blank=True, null=True)
     createtime = models.DateField(auto_now=True)
     updatetime = models.DateField(auto_now_add=True)
