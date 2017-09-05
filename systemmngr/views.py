@@ -95,7 +95,7 @@ def user_add(request):
         context = {
             'form': user_form
         }
-        return render(request, 'pages/user_add.html')
+        return render(request, 'pages/user_add.html', context)
 
 
 def user_edit(request, user_id):

@@ -1,0 +1,105 @@
+{% extends 'base_not.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+<p class="operate">
+  <a href="{% url 'role_add' %}" class="btn btn-primary btn-sm" role="button">Add Role</a>
+  
+</p>
+<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th class="center">
+	<label class="pos-rel">
+	  <input type="checkbox" class="ace" />
+	  <span class="lbl"></span>
+	</label>
+      </th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Describes</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for role in roles %}
+    <tr>
+      <td class="center">
+	<label class="pos-rel">
+	  <input type="checkbox" class="ace" />
+	  <span class="lbl"></span>
+	</label>
+      </td>
+      <td>{{role.id}}</td>
+      <td>{{role.name}}</td>
+      <td>{{role.describes}}</td>
+      <td>
+	<div class="hidden-sm hidden-xs btn-group">
+
+	  <a href="/user/edit-profile/{{profile.id}}/" class="btn btn-xs btn-info">
+	    <i class="ace-icon fa fa-pencil bigger-120"></i>
+	  </a>
+
+	  <button id="remove-profile-{{profile.id}}" class="btn btn-xs btn-danger remove-profile">
+	    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+	  </button>
+	</div>
+
+	<div class="hidden-md hidden-lg">
+	  <div class="inline pos-rel">
+	    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+	      <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+	    </button>
+
+	    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+	      <li>
+		<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+		  <span class="blue">
+		    <i class="ace-icon fa fa-search-plus bigger-120"></i>
+		  </span>
+		</a>
+	      </li>
+
+	      <li>
+		<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+		  <span class="green">
+		    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+		  </span>
+		</a>
+	      </li>
+
+	      <li>
+		<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+		  <span class="red">
+		    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+		  </span>
+		</a>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
+{% block js_part %}
+ <script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.dataTables.bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/dataTables.buttons.min.js' %}"></script>
+  <script src="{% static 'assets/js/buttons.flash.min.js' %}"></script>
+  <script src="{% static 'assets/js/buttons.html5.min.js' %}"></script>
+  <script src="{% static 'assets/js/buttons.print.min.js' %}"></script>
+  <script src="{% static 'assets/js/buttons.colVis.min.js' %}"></script>
+  <script src="{% static 'assets/js/dataTables.select.min.js' %}"></script>
+
+  <script src="{% static 'systemmngr/js/user_management.js' %}"></script>
+<script>
+  $("#role-management").addClass("active").parents("#authorization-management").addClass("open").siblings().removeClass("active");
+  $(function(){
+      UserManagement.init();
+  });
+</script>
+{% endblock js_part %}
