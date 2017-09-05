@@ -1,0 +1,20 @@
+[2017-09-05 07:44:11,175] - Internal Server Error: /systemmngr/user_role_list_req/1
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/Django-1.8.7-py2.7.egg/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/media/pontus_mount/CIFS/kArpBAv69qDJZ/integratedmngr/systemmngr/views.py", line 182, in user_role_list_req
+    role_related_user = gen_role_related_user(users, users_role)
+NameError: global name 'gen_role_related_user' is not defined
+[2017-09-05 07:44:44,757] - Internal Server Error: /systemmngr/user_role_list_req/1
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/Django-1.8.7-py2.7.egg/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/media/pontus_mount/CIFS/kArpBAv69qDJZ/integratedmngr/systemmngr/views.py", line 187, in user_role_list_req
+    return render(request, 'pages/special_user.html', context)
+  File "/usr/lib/python2.7/site-packages/Django-1.8.7-py2.7.egg/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/usr/lib/python2.7/site-packages/Django-1.8.7-py2.7.egg/django/template/loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/lib/python2.7/site-packages/Django-1.8.7-py2.7.egg/django/template/loader.py", line 46, in get_template
+    raise TemplateDoesNotExist(template_name)
+TemplateDoesNotExist: pages/special_user.html

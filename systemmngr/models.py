@@ -33,6 +33,19 @@ class Role(models.Model):
     updatetime = models.DateField(auto_now_add=True)
     orgid_display = models.CharField(max_length=225, blank=True, null=True)
     
+    def __unicode__(self):
+        return self.name
+
+class Userrole(models.Model):
+    userid =  models.BigIntegerField()
+    roleid = models.BigIntegerField()
+    createtime = models.DateField(auto_now=True)
+    updatetime = models.DateField(auto_now_add=True)
+
+    def __unicode__(self):
+        return 'roleid-{}-userid-{}'.format(self.roleid, self.userid)
+    
+    
 class Userinfo(models.Model):
     STATUS_CHOICES = (('1', 'normal'),
                       ('2', 'suoding'),
