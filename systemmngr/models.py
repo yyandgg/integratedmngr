@@ -6,6 +6,10 @@ class Menu(models.Model):
         ('1', 'yes'),
         ('2', 'no'),
     )
+    MENU_TYPE = (
+        ('folder', 'folder'),
+        ('text', 'text'),
+    )
     sysid = models.BigIntegerField(unique=True)
     name = models.CharField(max_length=200)
     functionregid = models.IntegerField(blank=True, null=True)
@@ -18,6 +22,7 @@ class Menu(models.Model):
     createtime = models.DateField(auto_now=True)
     updatetine = models.DateField(auto_now_add=True)
     isonlycenter = models.CharField(choices=IS_ONLY_CENTER, default='1', max_length=1)
+    type = models.CharField(choices=MENU_TYPE, default='folder', max_length=10)
 
 class Menupermission(models.Model):
     roleid = models.BigIntegerField()
@@ -68,3 +73,5 @@ class Userinfo(models.Model):
 
     def __unicode__(self):
         return self.email
+
+

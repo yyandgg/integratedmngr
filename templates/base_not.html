@@ -143,10 +143,10 @@
   		<b class="arrow"></b>
   	      </li>
 
-  	      <li class="">
-  		<a href="content-slider.html">
+  	      <li id="menurole-managemnet" class="">
+  		<a href="{% url 'menu_role_list' %}">
   		  <i class="menu-icon fa fa-caret-right"></i>
-  		  Authority Manage
+  		  Menurrole Management
   		</a>
 
   		<b class="arrow"></b>
@@ -331,7 +331,7 @@
         <script src="{% static 'assets/js/ace.min.js' %}"></script>
 
         <!-- inline scripts related to this page -->
-        <script type="text/javascript"> </script>
+        <script type="text/javascript" src="{% static 'systemmngr/js/base.js' %}"></script>
 	{% block js_part %}
 	{% endblock js_part %}
       </body>

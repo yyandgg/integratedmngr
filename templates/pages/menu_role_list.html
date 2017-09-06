@@ -1,0 +1,38 @@
+{% extends 'base_not.html' %}
+{% load static from staticfiles %}
+{% block content %}
+<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <div class="widget-body">
+	  <label for="form-field-select-1">Role select</label>
+	  <select class="form-control" id="form-field-select-1">
+            {% for role in roles %}
+	    <option value="{{role.id}}">{{role.name}}</option>
+            {% endfor %}
+	  </select>
+	<hr />
+  </div>
+</div><!-- /.span -->
+<div id="role-tree" class="col-sm-8 col-sm-offset-2">
+
+</div>
+
+<div id="operate" class="col-sm-8 col-sm-offset-2">
+<hr />
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-5">
+       <a href="#" class="btn btn-sm">Submit<i class="ace-icon fa fa-arrow-right icon-on-right bigger-125"></i></a>
+   </div>
+  </div>
+  <hr />
+</div>
+
+{% endblock content %}
+{% block js_part %}
+ <script src="{% static 'assets/js/tree.min.js' %}"></script>
+<script src="{% static 'systemmngr/js/menu_role.js' %}"></script>
+<script>
+  $("#menurole-managemnet").addClass("active").parents("#authorization-management").addClass("open").siblings().removeClass("active")
+ 
+  MenuRoleRelation.init();
+</script>
+{% endblock js_part %}

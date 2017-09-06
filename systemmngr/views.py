@@ -1,5 +1,6 @@
 import md5
 import hashlib
+import json
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect, Http404
@@ -10,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from .forms import LoginForm, UserForm, RoleForm
 from .models import Userinfo, Role, Userrole
 from .utils import gen_role_related_user
+from django.views.decorators.csrf import csrf_exempt
 
 import logging
 logger = logging.getLogger(__name__)
@@ -69,10 +71,32 @@ def register(request):
 
 def user_list(request):
     users = Userinfo.objects.all()
+    roles = Role.objects.all()
     context = {
-        'users': users
+        'users': users,
+        'roles': roles,
     }
     return render(request, 'pages/user_list.html', context)
+
+def get_current_role_req(request, user_id):
+    roles_id = [role.roleid for role in Userrole.objects.filter(userid=int(user_id))]
+    content = {
+        "roles_id": roles_id
+    }
+    return HttpResponse(json.dumps(content))
+
+@csrf_exempt
+def set_current_role_req_post(request):
+    data = request.POST;
+
+    userid = int(data["userid"])
+    selected_role = json.loads(data["selected_role"])
+
+    Userrole.objects.filter(userid=userid).delete()
+    Userrole.objects.bulk_create([
+        Userrole(userid = userid, roleid = int(roleid)) for  roleid in  selected_role
+    ])
+    return HttpResponseRedirect(reverse('user_list'))
 
 def user_add(request):
     if request.method == 'POST':
@@ -169,12 +193,13 @@ def role_delete(request, role_id):
     Role.objects.get(pk=role_id).delete()
     return HttpResponseRedirect(reverse('role_list'))
 
-def role_menu(request):
+def menu_role_list(request):
     roles = Role.objects.order_by('createtime')
+    
     context = {
         "roles": roles
     }
-    return render(request, 'pages/user_role.html', context)
+    return render(request, 'pages/menu_role_list.html', context)
 
 def user_role_list_req(request, role_id):
     # cha xun chu role fen bie dui ying de ren wu id 
@@ -202,6 +227,5 @@ def user_role_save_req_post(request):
     content = 'create success.'
     return HttpResponse(content)
 
-    
-
-               
+def get_tree_by_role_req(request, role_id):
+    return render(request, 'pages/tree.html', {})

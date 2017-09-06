@@ -1,6 +1,7 @@
 var UserManagement = function(){
     
     var initDataTables = function(){
+        role_by_user_id = 0;
 	
 	//initiate dataTables plugin
 	var myTable = $('#dynamic-table').DataTable({
@@ -125,6 +126,35 @@ var UserManagement = function(){
 		location.reload();
 	    });
 	});
+        
+        $("a[id^=userrole-permission-]").click(function() {
+            
+            var id_split = $(this).attr('id').split('-');
+            var id = id_split[id_split.length - 1];
+            $.get('/systemmngr/get-current-role-req/' + id +"/", function(resp_msg){
+                role_by_user_id = id;
+
+                roles_id = $.parseJSON(resp_msg);
+                $.each(roles_id["roles_id"], function(index, element) {
+                    $role_el = $("#" + element);
+                    if (!$role_el.is(":checked")){
+                         $("#" + element).click();
+                    }
+                });
+            });
+        });
+
+        $("#userrole-submit").click(function () {
+            data = {"userid": role_by_user_id};
+            var selected_role = [];
+           $("input[name='form-field-checkbox']:checked").each(function(index, element) {
+               selected_role.push(element.id)
+           })
+            data["selected_role"]  = JSON.stringify(selected_role);
+            $.post('/systemmngr/set-current-role-req/', data, function(resp_msg) {
+            });
+        });
+       
     };
 
     return {
