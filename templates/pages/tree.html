@@ -32,9 +32,9 @@ $(function() {
 
 	function initiateDemoData(){
 		var tree_data = {
-			'for-sale' : {text: 'For Sale', type: 'folder'}	,
-			'vehicles' : {text: 'Vehicles', type: 'folder'}	,
-			'rentals' : {text: 'Rentals', type: 'folder'}	,
+			'for-sale' : {text: 'For Sale', type: 'folder', 'id':1},
+			'vehicles' : {text: 'Vehicles', type: 'folder', 'id':2}	,
+			'rentals' : {text: 'Rentals', type: 'folder', 'id':3}	,
 			'real-estate' : {text: 'Real Estate', type: 'folder'}	,
 			'pets' : {text: 'Pets', type: 'folder'}	,
 			'tickets' : {text: 'Tickets', type: 'item'}	,
@@ -43,7 +43,7 @@ $(function() {
 		}
 		tree_data['for-sale']['additionalParameters'] = {
 			'children' : {
-				'appliances' : {text: 'Appliances', type: 'item'},
+				'appliances' : {text: 'Appliances', type: 'item', 'id': 5},
 				'arts-crafts' : {text: 'Arts & Crafts', type: 'item'},
 				'clothing' : {text: 'Clothing', type: 'item'},
 				'computers' : {text: 'Computers', type: 'item'},
